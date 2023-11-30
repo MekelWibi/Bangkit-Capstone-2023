@@ -13,7 +13,7 @@
 
 ### File for each path
 <ul>
-  <li[>Machine Learning](https://github.com/MekelWibi/Bangkit-Capstone-2023/blob/Machine-Learning/README.md)</li>
+  <li><a href="https://github.com/MekelWibi/Bangkit-Capstone-2023/blob/Machine-Learning/README.md">Machine Learning </a></li>
   <li>Cloud Computing</li>
   <li>Mobile Developement</li>
 </ul>
