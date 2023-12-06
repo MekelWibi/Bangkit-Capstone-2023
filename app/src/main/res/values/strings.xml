@@ -11,6 +11,9 @@
     <string name="login_failed">"Login failed"</string>
     <string name="title_welcome_page">"Welcome to CaloFruit"</string>
     <string name="message_welcome_page">"Look at your fruit calories"</string>
+    <string name="title_login_page">"Sign in to your Account"</string>
+    <string name="message_login_page">"Fill to sign in to your account"</string>
+    <string name="message_login_page_not_regis">"Don’t have an account?"</string>
     <string name="register">Register</string>
     <string name="login">Login</string>
 
