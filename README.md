@@ -15,5 +15,5 @@
 <ul>
   <li><a href="https://github.com/MekelWibi/Bangkit-Capstone-2023/blob/Machine-Learning/README.md">Machine Learning </a></li>
   <li>Cloud Computing</li>
-  <li>Mobile Developement</li>
+  <li><a href="https://github.com/MekelWibi/Bangkit-Capstone-2023/blob/Mobile-Development/README.md">Mobile Development </a></li>
 </ul>
