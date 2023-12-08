@@ -1,4 +1,4 @@
-# Bangkit-Capstone-2023
+# Cloud-Computing Path
 ## Product Capstone CH2-PS132 CaloFruit
 ### Team Member
 <ul>
