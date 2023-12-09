@@ -11,3 +11,9 @@ Calories are an essential source of energy for our bodies. The food we consume p
 
 Our application is designed to detect food images and provide calorie information based on them. We believe that this application will be a helpful tool for individuals who want to manage their daily calorie intake. We will narrow down our scope by using fruits as our dataset. We want our application to detect fruit based on image and provide calorie information based on an image.
 
+### File for each path
+<ul>
+  <li><a href="https://github.com/MekelWibi/Bangkit-Capstone-2023/blob/Machine-Learning/README.md">Machine Learning </a></li>
+  <li><a href="https://github.com/MekelWibi/Bangkit-Capstone-2023/blob/cloud-computing/README.md">Cloud Computing</li>
+</ul>
+
