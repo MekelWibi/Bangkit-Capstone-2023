@@ -1,2 +1,2 @@
 We've acquired our dataset from Kaggle and have now uploaded it to this repository:
-https://www.kaggle.com/datasets/nahidcse/fruit-calorie-prediction-yolov8/data
+https://www.kaggle.com/datasets/karimabdulnabi/fruit-classification10-class/data
