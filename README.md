@@ -12,11 +12,11 @@ Calories are an essential source of energy for our bodies. The food we consume p
 Our application is designed to detect food images and provide calorie information based on them. We believe that this application will be a helpful tool for individuals who want to manage their daily calorie intake. We will narrow down our scope by using fruits as our dataset. We want our application to detect fruit based on image and provide calorie information based on an image.
 
 ## Dataset
-We are using fruit [dataset](https://www.kaggle.com/datasets/karimabdulnabi/fruit-classification10-class/data) with 10 classes from kaggle. We got around 3000 image in total with this distribution.
+We are using fruit [dataset](https://www.kaggle.com/datasets/karimabdulnabi/fruit-classification10-class/data) with 10 classes from kaggle. We got around 3000 images in total with this distribution.
 
 <ol>
   <li>test each category 105 images</li>
-  <li>train each category 230</li>
+  <li>train each category 230 images</li>
   <li>prediction 50 images</li>
 </ol>
 
