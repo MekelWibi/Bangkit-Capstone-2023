@@ -17,7 +17,6 @@ import com.dicoding.calofruit.R
 import com.dicoding.calofruit.adapter.StoryAdapter
 import com.dicoding.calofruit.data.LoadingStateAdapter
 import com.dicoding.calofruit.databinding.ActivityMainBinding
-import com.dicoding.calofruit.ui.maps.MapsActivity
 import com.dicoding.calofruit.ui.story.UploadStoryActivity
 import com.dicoding.calofruit.ui.welcome.WelcomeActivity
 import com.dicoding.calofruit.utils.ViewModelFactory
@@ -58,7 +57,7 @@ class MainActivity : AppCompatActivity() {
         binding.bottomNavigation.setOnNavigationItemSelectedListener { menuItem ->
             when (menuItem.itemId) {
                 R.id.menu_history -> {
-                    startActivity(Intent(this, MapsActivity::class.java))
+                    startActivity(Intent(this, MainActivity::class.java))
                     true
                 }
                 R.id.menu_localization -> {

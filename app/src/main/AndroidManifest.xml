@@ -24,12 +24,6 @@
         <meta-data
             android:name="com.google.android.geo.API_KEY"
             android:value="AIzaSyCNQGquaKL-Qwpud-GNk4fa0VjsgOC67kg" />
-
-        <activity
-            android:name="com.dicoding.calofruit.ui.maps.MapsActivity"
-            android:exported="false"
-            android:label="@string/title_activity_maps"
-            android:parentActivityName="com.dicoding.calofruit.ui.main.MainActivity"/>
         <activity
             android:name="com.dicoding.calofruit.ui.splashscreen.SplashScreenActivity"
             android:exported="true">

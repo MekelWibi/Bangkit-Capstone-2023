@@ -8,7 +8,6 @@ import com.dicoding.calofruit.injection.Injection
 import com.dicoding.calofruit.ui.welcome.WelcomeViewModel
 import com.dicoding.calofruit.ui.login.LoginViewModel
 import com.dicoding.calofruit.ui.main.MainViewModel
-import com.dicoding.calofruit.ui.maps.MapsViewModel
 import com.dicoding.calofruit.ui.register.RegisterViewModel
 import com.dicoding.calofruit.ui.story.UploadStoryViewModel
 
@@ -28,8 +27,6 @@ class ViewModelFactory private constructor(
             return MainViewModel(userRepository) as T
         }else if(modelClass.isAssignableFrom(UploadStoryViewModel::class.java)) {
             return UploadStoryViewModel(userRepository) as T
-        }else if(modelClass.isAssignableFrom(MapsViewModel::class.java)) {
-            return MapsViewModel(userRepository) as T
         }
         throw IllegalArgumentException("No ModelClass: " + modelClass.name)
     }
