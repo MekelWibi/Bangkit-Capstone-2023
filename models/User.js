@@ -1,8 +1,14 @@
 const History = require('./History.js');
-const { Sequelize, DataTypes } = require('sequelize');
+const { DataTypes } = require('sequelize');
 const sequelize = require('../config/database.js');
 
 const User = sequelize.define('User', {
+  id: {
+    type: DataTypes.INTEGER,
+    autoIncrement: true,
+    primaryKey: true,
+    allowNull: false,
+  },
   username: {
     type: DataTypes.STRING,
     allowNull: false,
@@ -13,6 +19,7 @@ const User = sequelize.define('User', {
     allowNull: false,
   },
 });
+
 
 
 module.exports = User;

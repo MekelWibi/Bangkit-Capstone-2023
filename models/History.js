@@ -1,8 +1,14 @@
-const User = require('./User.js');
+// Import model Food
 const Food = require('./Food.js');
+
+// Import model User
+const User = require('./User.js');
+
+// Inisialisasi Sequelize
 const { Sequelize, DataTypes } = require('sequelize');
 const sequelize = require('../config/database.js');
 
+// Definisi model History
 const History = sequelize.define('History', {
   userId: {
     type: DataTypes.INTEGER,

@@ -7,6 +7,12 @@ const sequelize = require('../config/database.js');
 
 // Definisi model Food
 const Food = sequelize.define('Food', {
+  id: {
+    type: DataTypes.INTEGER,
+    autoIncrement: true,
+    primaryKey: true,
+    allowNull: false,
+  },
   name: {
     type: DataTypes.STRING,
     allowNull: false,
@@ -17,6 +23,5 @@ const Food = sequelize.define('Food', {
   },
 });
 
-// Definisi relasi dengan model History
 
 module.exports = Food;
