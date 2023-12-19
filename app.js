@@ -25,7 +25,14 @@ app.use('/auth', authRoutes);
 app.use('/food', foodRoutes);
 app.use('/history', historyRoutes);
 
-const PORT = process.env.PORT || 4000;
+app.use((err, req, res, next) => {
+  console.log(err)
+  res.json({
+    error: "Internal server error"
+  })
+})
+
+const PORT = process.env.PORT || 8080;
 app.listen(PORT, () => {
   console.log(`Server berjalan di http://localhost:${PORT}`);
 });
