@@ -124,3 +124,20 @@ fun rotateImage(source: Bitmap, angle: Float): Bitmap {
         source, 0, 0, source.width, source.height, matrix, true
     )
 }
+
+data class PredictionResponse(
+    val data: PredictedData,
+    val status: Status
+)
+
+data class PredictedData(
+    val predicted_calorie: Double,
+    val predicted_class: String
+)
+
+data class Status(
+    val code: Int,
+    val message: String
+)
+
+

@@ -53,7 +53,7 @@
     <string name="output_date">dd MMM yyyy | HH.mm</string>
     <string name="logout">Logout</string>
     <string name="settings">Settings</string>
-    <string name="maps">Riwayat</string>
+    <string name="maps">Beranda</string>
     <string name="title_activity_maps">Peta</string>
     <string name="tv_location">Lokasi:</string>
     <string name="tv_getLocation">Lokasi</string>

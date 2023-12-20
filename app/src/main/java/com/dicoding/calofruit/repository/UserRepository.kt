@@ -14,10 +14,8 @@ import com.dicoding.calofruit.retrofit.UserModel
 import com.dicoding.calofruit.response.ErrorResponse
 import com.dicoding.calofruit.response.ListStoryItem
 import com.dicoding.calofruit.response.LoginResponse
-import com.dicoding.calofruit.response.MapsResponse
 import com.dicoding.calofruit.response.RegisterResponse
 import com.dicoding.calofruit.response.Result
-import com.dicoding.calofruit.response.StoryResponse
 import com.dicoding.calofruit.retrofit.ApiService
 import com.dicoding.calofruit.utils.UserPreference
 import com.dicoding.calofruit.utils.wrapEspressoIdlingResource
@@ -113,21 +111,6 @@ class UserRepository (
         }
     }
 
-    fun getStoryWithLocation(): LiveData<Result<StoryResponse>> =
-        liveData {
-            emit(Result.Loading)
-            try {
-                val storyLocationResponse = apiService.getStoriesWithLocation()
-                emit(Result.Success(storyLocationResponse))
-            } catch (e: HttpException) {
-                val error = e.response()?.errorBody()?.string()
-                val errorRes = Gson().fromJson(error, MapsResponse::class.java)
-                Log.d(TAG, "getStoryWithLocation ${e.message.toString()}")
-                emit(Result.Error(errorRes.message))
-            } catch (e: Exception) {
-                emit(Result.Error(e.toString()))
-            }
-        }
 
     suspend fun logout() {
         userPreference.logout()

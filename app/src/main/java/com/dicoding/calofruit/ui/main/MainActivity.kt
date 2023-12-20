@@ -35,13 +35,6 @@ class MainActivity : AppCompatActivity() {
 
         customActionBar()
 
-        adapter = StoryAdapter()
-
-        val layoutManager = LinearLayoutManager(this)
-        binding.rvStory.layoutManager = layoutManager
-
-        setupAction()
-
         mainViewModel.getSession().observe(this) { user ->
             if (!user.isLogin) {
                 startActivity(Intent(this, WelcomeActivity::class.java))
@@ -49,11 +42,6 @@ class MainActivity : AppCompatActivity() {
             }
         }
 
-        binding.swiperefresh.setOnRefreshListener {
-            adapter.refresh()
-            scrollToItem(0)
-            Toast.makeText(this@MainActivity, "Story Refresh", Toast.LENGTH_SHORT).show()
-        }
         binding.bottomNavigation.setOnNavigationItemSelectedListener { menuItem ->
             when (menuItem.itemId) {
                 R.id.menu_history -> {
@@ -78,10 +66,6 @@ class MainActivity : AppCompatActivity() {
 
     }
 
-    private fun scrollToItem(index: Int) {
-        val layoutManager = binding.rvStory.layoutManager as LinearLayoutManager
-        layoutManager.scrollToPositionWithOffset(index, 0)
-    }
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         menuInflater.inflate(R.menu.menu2, menu)
         return true
@@ -125,18 +109,4 @@ class MainActivity : AppCompatActivity() {
         binding.progressBar.visibility = if (isLoading) View.VISIBLE else View.GONE
     }
 
-    private fun setupAction() {
-        binding.apply {
-            binding.rvStory.adapter = adapter.withLoadStateFooter(
-                footer = LoadingStateAdapter {
-                    adapter.retry()
-                }
-            )
-            mainViewModel.listStory.observe(this@MainActivity) {
-                adapter.submitData(lifecycle, it)
-                showLoading(false)
-                binding.swiperefresh.isRefreshing = false
-            }
-        }
-    }
 }
