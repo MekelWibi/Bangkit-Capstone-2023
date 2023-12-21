@@ -1,11 +1,13 @@
 package com.dicoding.calofruit.retrofit
 
+import com.dicoding.calofruit.response.FruitResponse
 import com.dicoding.calofruit.response.LoginResponse
 import com.dicoding.calofruit.response.RegisterResponse
 import com.dicoding.calofruit.response.StoryResponse
 import com.dicoding.calofruit.response.UploadResponse
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
+import retrofit2.Call
 import retrofit2.http.Field
 import retrofit2.http.FormUrlEncoded
 import retrofit2.http.GET
@@ -45,8 +47,7 @@ interface ApiService {
         @Part("lon") lon: Double?
     ): UploadResponse
 
-    @GET("stories")
-    suspend fun getStoriesWithLocation(
-        @Query("location") location : Int = 1,
-    ): StoryResponse
+    @Multipart
+    @POST("prediction")
+    fun predictImage(@Part image: MultipartBody.Part): Call<FruitResponse>
 }
