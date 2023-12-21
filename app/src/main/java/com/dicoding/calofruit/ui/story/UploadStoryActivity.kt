@@ -6,15 +6,17 @@ import android.content.Intent
 import android.content.pm.PackageManager
 import android.net.Uri
 import android.os.Bundle
+import android.os.Environment
 import android.util.Log
 import android.widget.TextView
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
-import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import com.dicoding.calofruit.R
 import com.dicoding.calofruit.databinding.ActivityUploadStoryBinding
+import com.dicoding.calofruit.response.FruitResponse
+import com.dicoding.calofruit.retrofit.ApiService
 import com.dicoding.calofruit.retrofit.PredictionService
 import com.dicoding.calofruit.utils.PredictionResponse
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
@@ -26,6 +28,12 @@ import retrofit2.Response
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import java.io.File
+import java.io.FileOutputStream
+import java.io.IOException
+import java.io.InputStream
+import java.text.SimpleDateFormat
+import java.util.Date
+
 
 class UploadStoryActivity : AppCompatActivity() {
 
@@ -112,38 +120,59 @@ class UploadStoryActivity : AppCompatActivity() {
         .addConverterFactory(GsonConverterFactory.create())
         .build()
 
-    private val predictionService = retrofit.create(PredictionService::class.java)
+    private val predictionService = retrofit.create(ApiService::class.java)
 
     private fun uploadImage() {
         currentImageUri?.let { uri ->
-            val file = File(uri.path ?: "")
-            val requestFile = RequestBody.create("image/*".toMediaTypeOrNull(), file)
-            val body = MultipartBody.Part.createFormData("image", file.name, requestFile)
+            try {
+                val inputStream: InputStream? = contentResolver.openInputStream(uri)
+                inputStream?.let {
+                    val file = File(cacheDir, "temp_file_name")
+                    val outputStream = FileOutputStream(file)
+                    inputStream.copyTo(outputStream)
+                    outputStream.close()
 
-            predictionService.uploadImage(body).enqueue(object : Callback<PredictionResponse> {
-                override fun onResponse(
-                    call: Call<PredictionResponse>,
-                    response: Response<PredictionResponse>
-                ) {
-                    if (response.isSuccessful) {
-                        val prediction = response.body()?.data
-                        prediction?.let {
-                            val message =
-                                "Kelas Diprediksi: ${it.predicted_class}\nKalori Diprediksi: ${it.predicted_calorie}"
-                            showPredictionResult(message)
-                        }
+                    // Verifikasi file sebelum dikirim ke server
+                    if (file.exists() && file.length() > 0) {
+                        val requestFile = RequestBody.create("image/*".toMediaTypeOrNull(), file)
+                        val body = MultipartBody.Part.createFormData("image", file.name+".jpg", requestFile)
+
+                        predictionService.predictImage(body).enqueue(object : Callback<FruitResponse> {
+                            override fun onResponse(
+                                call: Call<FruitResponse>,
+                                response: Response<FruitResponse>
+                            ) {
+                                if (response.isSuccessful) {
+                                    val prediction = response.body()?.data
+                                    prediction?.let {
+                                        val message =
+                                            "Kelas Diprediksi: ${it.predictedClass}\nKalori Diprediksi: ${it.predictedCalorie}"
+                                        showPredictionResult(message)
+                                    }
+                                } else {
+                                    Log.e("UploadStoryActivity", "Respons gagal: ${response.errorBody()?.string()}")
+                                    showToast("Silahkan berikan format file jpg")
+                                }
+                            }
+
+                            override fun onFailure(call: Call<FruitResponse>, t: Throwable) {
+                                showToast("Permintaan gagal: ${t.message}")
+                                Log.e("UploadStoryActivity", "Permintaan gagal", t)
+                            }
+                        })
                     } else {
-                        showToast("Gagal mendapatkan prediksi")
+                        showToast("Gagal memuat file atau file kosong")
+                        Log.e("UploadStoryActivity", "Gagal memuat file atau file kosong")
                     }
-                }
-
-                override fun onFailure(call: Call<PredictionResponse>, t: Throwable) {
-                    showToast("Permintaan gagal: ${t.message}") // Pesan kesalahan ditampilkan ke pengguna
-                    Log.e("UploadStoryActivity", "Permintaan gagal", t) // Pesan kesalahan dicatat di logcat untuk penelusuran lebih lanjut
-                }
-            })
+                } ?: showToast("Gagal membaca file")
+            } catch (e: Exception) {
+                showToast("Terjadi kesalahan: ${e.message}")
+                Log.e("UploadStoryActivity", "Terjadi kesalahan", e)
+            }
         } ?: showToast(getString(R.string.empty_image_warning))
     }
+
+
 
 
     private fun showPredictionResult(message: String) {
