@@ -9,7 +9,7 @@ import retrofit2.converter.gson.GsonConverterFactory
 
 class ApiConfig {
     companion object {
-        var BASE_URL = "https://story-api.dicoding.dev/v1/"
+        var BASE_URL = "https://predict-rwsk5773ya-et.a.run.app/"
         fun getApiService(token: String): ApiService {
             val loggingInterceptor =
                 if (BuildConfig.DEBUG) {
